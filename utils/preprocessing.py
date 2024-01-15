@@ -4,7 +4,7 @@ from sklearn.preprocessing import StandardScaler
 
 
 class Preprocessor ():
-    def __init__(self, max_train_len=180, test_len=30, split_coeff=0.1):
+    def __init__(self, max_train_len=256, test_len=32, split_coeff=0.1):
         self.train_len = max_train_len
         self.test_len = test_len
         self.split = split_coeff

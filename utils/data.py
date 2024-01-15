@@ -4,12 +4,13 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+from torchvision.utils import make_grid
 from torch.utils.data import Dataset, DataLoader
 
 
 
 class TradingDataset (Dataset):
-    def __init__(self, root_dir, train_len=180, test_len=30):
+    def __init__(self, root_dir, train_len=256, test_len=32):
         self.root_dir = root_dir
         self.train_len = train_len
         self.test_len = test_len
@@ -51,6 +52,38 @@ class TradingDataset (Dataset):
         test = torch.tensor(test.transpose(1, 0), dtype=torch.float32)
 
         return train, test
+
+
+
+# Отрисовывает результаты предсказания модели
+def show_quality (model, loader, num=4):
+    train, test = next(iter(loader))
+    
+    train = train[:num]
+    test = test[:num]
+    
+    pred = model(train).detach()
+
+    fig, axs = plt.subplots(int(num**(1/2)), int(num**(1/2)), figsize=(20, 10))
+    
+    for i in range(num):
+        row = i // int(num**(1/2))
+        col = i % int(num**(1/2))
+
+        real = torch.hstack((train[i, 3, :], test[i, 0, :]))
+        predict = torch.hstack((train[i, 3, :], pred[i, 0, :]))
+
+        axs[row, col].plot(predict, "red")
+        axs[row, col].plot(real, "black")
+        axs[row, col].grid()
+    
+    image_path = 'plot_image.png'
+    plt.savefig(image_path)
+    plt.show()
+
+    os.remove(image_path)
+    
+    return
 
 
 
