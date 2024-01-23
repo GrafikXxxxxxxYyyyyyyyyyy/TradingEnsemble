@@ -1,0 +1,36 @@
+{
+    "os": "macOS-13.5-arm64-arm-64bit",
+    "python": "3.11.2",
+    "heartbeatAt": "2024-01-23T04:51:51.092775",
+    "startedAt": "2024-01-23T04:51:50.028911",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "<python with no main file>",
+    "codePathLocal": null,
+    "git": {
+        "remote": "https://github.com/GrafikXxxxxxxYyyyyyyyyyy/TradingEnsemble.git",
+        "commit": "032d3b0c45754226b81a22c6d1ab0332756a7c94"
+    },
+    "email": "labzin.as@phystech.edu",
+    "root": "/Users/honeysuckle/dev/Git/TradingEnsemble",
+    "host": "Arthurs-MBP",
+    "username": "honeysuckle",
+    "executable": "/opt/homebrew/opt/python@3.11/bin/python3.11",
+    "cpu_count": 8,
+    "cpu_count_logical": 8,
+    "disk": {
+        "/": {
+            "total": 228.27386474609375,
+            "used": 17.10369110107422
+        }
+    },
+    "gpuapple": {
+        "type": "arm",
+        "vendor": "Apple"
+    },
+    "memory": {
+        "total": 8.0
+    }
+}

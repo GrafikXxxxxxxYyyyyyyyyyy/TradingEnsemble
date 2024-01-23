@@ -25,6 +25,7 @@ class Preprocessor ():
 
         splitted_history = []
         window = (self.train_len + self.test_len)
+        # Режем с шагом 1
         for i in range(0, len(p_history) - window + 1):
             window_data = p_history.iloc[i:i+window].copy()
             

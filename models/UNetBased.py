@@ -127,18 +127,13 @@ class UNetDecoderBlock (nn.Module):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+                                        # ##############################
+                                        #  _   _       _   _      _    #
+                                        # | | | |     | \ | | ___| |_  #
+                                        # | | | |_____|  \| |/ _ \ __| #
+                                        # | |_| |_____| |\  |  __/ |_  #
+                                        #  \___/      |_| \_|\___|\__| #
+                                        # ##############################
 
 
 
@@ -175,20 +170,19 @@ class UNetBased (nn.Module):
 
     def forward (self, X):
         out = self.extraction(X)
-        print(out.shape)
 
         residuals = []
         for encoder_block in self.encoder:
             out, res = encoder_block(out)
             residuals.append(res)
-            print(out.shape, res.shape)
+            # print(f"ENet block out: {out.shape}\nresidual {res.shape}")
 
         out = self.bottleneck(out)
-        print(out.shape)
+        # print(f"Bottleneck out {out.shape}")
 
         for i, decoder_block in enumerate(self.decoder):
             out = decoder_block(out, residuals[-i-1])
-            print(out.shape)
+            # print(f"Decoder block out {out.shape}")
 
         out = self.final(out)
 

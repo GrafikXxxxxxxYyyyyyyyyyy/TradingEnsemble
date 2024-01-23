@@ -52,38 +52,22 @@ class TradingDataset (Dataset):
         test = torch.tensor(test.transpose(1, 0), dtype=torch.float32)
 
         return train, test
-
-
-
-# Отрисовывает результаты предсказания модели
-def show_quality (model, loader, num=4):
-    train, test = next(iter(loader))
     
-    train = train[:num]
-    test = test[:num]
-    
-    pred = model(train).detach()
 
-    fig, axs = plt.subplots(int(num**(1/2)), int(num**(1/2)), figsize=(20, 10))
-    
-    for i in range(num):
-        row = i // int(num**(1/2))
-        col = i % int(num**(1/2))
 
-        real = torch.hstack((train[i, 3, :], test[i, 0, :]))
-        predict = torch.hstack((train[i, 3, :], pred[i, 0, :]))
 
-        axs[row, col].plot(predict, "red")
-        axs[row, col].plot(real, "black")
-        axs[row, col].grid()
-    
-    image_path = 'plot_image.png'
-    plt.savefig(image_path)
-    plt.show()
+# Функция для получения loader'ов
+def make_loaders (rootpath="data/", train_len=256, test_len=32, batch_size=16):
+    # Получаем датасеты данных для обучения и валидации
+    train_dataset = TradingDataset(rootpath + "train", train_len, test_len)
+    val_dataset = TradingDataset(rootpath + "val", train_len, test_len)
+    print(f"Train dataset lenght: {len(train_dataset)}\nValidation dataset lenght: {len(val_dataset)}\n")
 
-    os.remove(image_path)
-    
-    return
+    train_loader = DataLoader(train_dataset, batch_size, shuffle=True)
+    val_loader = DataLoader(val_dataset, batch_size, shuffle=True)
+    print(f"Train loader lenght: {len(train_loader)}\nValidation loader lenght: {len(val_loader)}")
+
+    return train_loader, val_loader
 
 
 

@@ -1,0 +1,1 @@
+{"Loss on TRAIN": 0.3021061420440674, "_timestamp": 1705985248.997622, "_runtime": 9.28444504737854, "_step": 11, "Metric MAE": 0.2107104721168677, "Loss on TEST": 0.08067945421983798, "_wandb": {"runtime": 8}}
